@@ -1,5 +1,7 @@
 # Elo-Inflation: wenn die Skala wandert – Streamlit-Demo
 
+**[→ Demo live ausprobieren](https://sebastianhanisch-elo-inflation-demo.streamlit.app/)**
+
 Zusatzstück der **Ranking-Linie** (Konzepte-Demo, Methodenreihe), Fortsetzung von `elo-demo`: Eine Elo-Wertung gilt nur **relativ zum Feld**. Gehen und kommen Spieler, kann sich
 die Skala verschieben, ohne dass sich ein einzelner Spieler ändert. Gemessen wird in einem simulierten, **offenen Feld** (Abgang und Zugang, Lernen und Altern), wann das
 geschieht, woran man es erkennt (ein **Anker** konstanter Stärke) und was Anlauf-K, Untergrenze, K-Stufe und **Platzierungspartien** daran ändern. Alles ist simuliert, es gibt
@@ -155,4 +157,4 @@ Gebaut mit Streamlit, Plotly, numpy, pandas und fpdf2.
 
 ---
 
-Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zu den Demos: [Interaktive Demos](https://sebastianhanisch.net/demos.html).
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Ranking: von der Siegtabelle bis Learning to Rank](https://sebastianhanisch.net/konzepte-ranking.html).
