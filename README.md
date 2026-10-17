@@ -11,11 +11,11 @@ keinen echten Datensatz; die Gründerstärken und der Zufallsstrom kommen aus de
 
 Wann steigen oder fallen Elo-Wertungen schneller als die Fähigkeit, und woran sieht man es? **Die Summe der Wertungen ist die Bilanz:** Eine Partie verschiebt nur Punkte, die
 Summe ändert sich durch die Startwertungen der Neuen, die Wertungen der Gehenden, ungleiches K und eine Untergrenze, sonst durch nichts. Das **Wertungsmittel richtet sich
-deshalb nach dem Zugang**, nicht nach der Fähigkeit. Gemessen (40 Spieler, 40 Saisons, 15 % Abgang, Mittel über 60 Läufe): ohne Zu- und Abgang gibt es keine Drift, bei
+deshalb nach Zugang und Abgang**; bei unselektivem Abgang bleibt es bei der Startwertung der Neuen, unabhängig von der Fähigkeit. Gemessen (40 Spieler, 40 Saisons, 15 % Abgang, Mittel über 60 Läufe): ohne Zu- und Abgang gibt es keine Drift, bei
 zufälligem Abgang und bei Abgang der Veteranen keine messbare (−4 und +1 Punkte). **Gehen die Schwächsten**, fällt die Drift auf **−25** Punkte (die Fähigkeit steigt um 184, die
 Wertung nur um 160); kommen **lernende Neue** bei 1500, steigt sie auf **+50**. **Lernt das ganze Feld** (+0,02 Einheiten je Saison), sind es **−143**, **altert es**, **+135**, und das
-Wertungsmittel bleibt bei null: Elo kennt nur Differenzen. Ein **Anker** (Spieler konstanter Stärke) liest das ab: −1 → −96 Punkte, wenn er nach 2 bzw. nach 30 Saisons zu einem
-lernenden Feld stößt; +20 → +80 bei einem alternden. **Anlauf-K** erzeugt nur mit Auslese Punkte (−25 → +61, 6.596 Punkte), die **Untergrenze** erst, wo Schwache bleiben (+57).
+Wertungsmittel bleibt bei null: Elo kennt nur Differenzen. Ein **Anker** (Spieler konstanter Stärke) liest das ab, mit Nachlauf und Rauschen (Mittel über 60 Läufe): −1 → −96 Punkte, wenn er nach 2 bzw. nach 30 Saisons zu einem
+lernenden Feld stößt; +20 → +80 bei einem alternden. **Anlauf-K** ändert die Skala stark, wo die Startwertung falsch liegt: bei Auslese +6.596 Punkte (−25 → +61), bei zufälligem Abgang kaum; die **Untergrenze** wirkt erst, wo Schwache bleiben (+57).
 **Platzierungspartien** beseitigen den Eintrittsfehler (+173 → +7 Punkte), aber nicht die Drift: Sie dreht bei der lernenden Jugend auf −150, bei Auslese ins Plus, und hängt am Prior.
 
 ## Modell
@@ -71,13 +71,13 @@ Alle Zahlen: 60 feste Läufe, 40 Spieler, 40 Saisons zu 20 Runden, K = 20, 15 % 
 
 - **Die Vorab-Zahlen verschieben sich um wenige Punkte** (+46 / −30 / +58 / −147 / +131 gegen **+50 / −25 / +61 / −143 / +135**): andere Gründerstärken (gleichabständig aus dem
   Generator statt zufällig gezogen), anderer Zufallsstrom, 60 feste Läufe, Untergrenze nach jeder Runde statt nach jeder Partie. Die Aussagen sind dieselben.
-- **Anlauf-K bringt nur mit Auslese Punkte.** Der Plan nannte „+58, wenn ein Anlauf-K Punkte erzeugt“ ohne Bedingung; bei zufälligem Abgang bleibt es bei ±0 (−4 gegen −2).
-- **Die Untergrenze ist nicht nur ein negativer Befund.** Bei 1350 greift sie nicht (5 Punkte), weil die Schwächsten vorher gehen; bleiben die Schwachen und liegt sie bei 1450,
+- **Anlauf-K wirkt stark nur, wo die Startwertung falsch liegt.** Der Plan nannte „+58, wenn ein Anlauf-K Punkte erzeugt“ ohne Bedingung; bei zufälligem Abgang bleibt es bei ±0 (−4 gegen −2), bei Auslese sind es +6.596 Punkte. Bei lernender Jugend ohne Auslese vernichtet Anlauf-K 120 Punkte (−20.988, Drift +50 → −52; Zusatzmessung der Prüfung mit 60 Läufen, nicht im Test).
+- **Die Untergrenze ist nicht nur ein negativer Befund.** Bei 1350 greift sie kaum (im Mittel 5 Punkte), weil die Schwächsten meist vorher gehen; bleiben die Schwachen und liegt sie bei 1450,
   erzeugt sie 15.708 Punkte und die Drift +57. Der Plan hatte „greift nicht“ als Befund; das gilt nur für diese Parameter.
 - **Der Anker bleibt vier Saisons** (80 Partien) statt zwei (40): Mit 40 Partien läuft er seinem Ziel nur zu etwa 60 % nach (lernendes Feld nach 30 Saisons: −60 statt −96). Der Nachlauf
   steht im Verdikt; der Anker liest die Drift ab, aber verzögert und mit ±40 Punkten Rauschen je Lauf.
 - **Platzierung: gemischter Befund statt Gegenmittel**, wie in der Vorab-Messung (30 Läufe); Prior-Regler bis 1,5 statt 2,0, weil die Schätzung der lernenden Jugend bei 2,0 weglief
-  (Drift −1.314). Die Vorab-Zahl +46 war die Summe zweier Wirkungen: Eintrittsfehler (plus) und das Lernen der Etablierten (minus).
+  (Drift −1.314); schon ab 1,5 wächst sie schnell (−302 gegen −150 bei 1,0). Die Vorab-Zahl +46 war die Summe zweier Wirkungen: Eintrittsfehler (plus) und das Lernen der Etablierten (minus).
 - **Neu gegenüber dem Plan:** die Bilanz der Wertungssumme als Erklärung (vier Posten, im Orakel exakt geprüft) und der Satz, dass das Wertungsmittel sich nach dem Zugang richtet.
   Die geplante Funktion `rank_with_tolerance` ist nicht umgesetzt: Die Demo vergleicht Mittel mit Standardfehlern, keine Rangfolgen.
 
@@ -110,7 +110,7 @@ Alle Zahlen: 60 feste Läufe, 40 Spieler, 40 Saisons zu 20 Runden, K = 20, 15 % 
 
 ## Tests
 
-152 Tests, gut eine Minute: Einheiten gegen Handwerte (`test_rating.py`: Elo-Schritt, Anlauf-K, K-Stufe, Untergrenze, Platzierung; `test_pool.py`: Summenerhaltung, Bilanz,
+169 Tests, rund 140 Sekunden: Einheiten gegen Handwerte (`test_rating.py`: Elo-Schritt, Anlauf-K, K-Stufe, Untergrenze, Platzierung; `test_pool.py`: Summenerhaltung, Bilanz,
 Abgangsregeln, Neue, Trend, Anker, Zufallsverbrauch, Randfälle), Generator (`test_generator.py`, wortgleich), **Orakel** (`test_oracle_elo_inflation.py`: eine unabhängige
 Partie-für-Partie-Rechnung in reinem Python auf denselben Zufallszahlen gegen die vektorisierte Simulation in 12 Modellvarianten; Elo gegen die Lehrbuchformel 10^(ΔR/400);
 die Platzierungsschätzung gegen den Maximierer von scipy; die Mini-Instanz des Plans von Hand; die Bilanz über 20 Läufe), Maße und Verdikte (`test_evaluation.py`), alle Zahlen

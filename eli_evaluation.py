@@ -304,7 +304,7 @@ def verdict_anchor(rows):
 def verdict_nothing(rows):
     r = {x["key"]: x for x in rows}
     return "info", (f"Untergrenze 1350 und K-Stufe ab 1600 verändern die Drift **nicht**: {signed(r['weak']['d40'])} gegen {signed(r['weak_floor']['d40'])} und "
-                    f"{signed(r['weak_steps']['d40'])}. Die Untergrenze greift nie, weil die Schwächsten gehen, bevor sie sie erreichen; die K-Stufe bewegt nur wenige Spieler. "
+                    f"{signed(r['weak_steps']['d40'])}. Die Untergrenze greift kaum (im Mittel {thou(r['weak_floor']['floor'])} Punkte), weil die Schwächsten meist gehen, bevor sie sie erreichen; die K-Stufe bewegt nur wenige Spieler. "
                     f"**Bleiben die Schwachen** (zufälliger Abgang) und liegt die Untergrenze bei 1450, erzeugt sie {thou(r['random_floor']['floor'])} Punkte und die Drift steigt "
                     f"auf **{signed(r['random_floor']['d40'])}**: Die Untergrenze wirkt, wo sie greift. Gemessen bei diesen Parametern, kein Beleg für Unschädlichkeit.")
 

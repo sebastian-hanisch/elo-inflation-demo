@@ -23,7 +23,7 @@ K_MIN, K_MAX, DEFAULT_K = 5, 60, 20                                          # P
 K0_MIN, K0_MAX, DEFAULT_K0 = 20, 300, 120                                    # Anlauf-K in Punkten
 FLOOR_MIN, FLOOR_MAX, FLOOR_STEP, DEFAULT_FLOOR = 1000, 1450, 50, 1350       # Untergrenze der Wertung in Punkten
 START = ("Startwertung 1500", "Platzierungspartien")
-PRIOR_MIN, PRIOR_MAX, PRIOR_STEP, DEFAULT_PRIOR = 0.3, 1.5, 0.1, 1.0         # Prior der Platzierung (Standardabweichung, θ-Einheiten); darüber wächst die Drift unbegrenzt (Experiment 6)
+PRIOR_MIN, PRIOR_MAX, PRIOR_STEP, DEFAULT_PRIOR = 0.3, 1.5, 0.1, 1.0         # Prior der Platzierung (Standardabweichung, θ-Einheiten); darüber wächst die Drift schnell, ab 2,0 läuft sie weg (Experiment 6)
 JOIN_MIN, DEFAULT_JOIN = 0, 2                                                # Saisons, die vor dem Beitritt des Ankers gespielt sind (Obergrenze: Saisons − 2)
 SEED_MAX, DEFAULT_SEED = 999999, 17                                         # ein typischer Lauf: Drift und Anker nahe dem Mittel der 200 Läufe 0 bis 199 (nicht der auffälligste)
 

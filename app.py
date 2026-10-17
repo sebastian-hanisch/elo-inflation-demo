@@ -99,8 +99,8 @@ with st.expander("Warum die Skala wandert", expanded=True):
         """
 1. **Die Summe ist die Bilanz.** Eine Partie verschiebt Punkte von einem Spieler zum anderen, die Summe aller Wertungen bleibt gleich (bei gleichem K). Sie ändert sich nur durch
    **vier Dinge**: die Startwertungen der Neuen (plus), die Wertungen der Gehenden (minus), Punkte aus **ungleichem K** (Anlauf-K, K-Stufe) und aus einer **Untergrenze**.
-2. **Das Mittel richtet sich nach dem Zugang.** Das Wertungsmittel steigt oder fällt, bis die Gehenden im Mittel so viel mitnehmen, wie die Kommenden mitbringen. Kommen alle bei
-   1500, strebt das Mittel dorthin, gleichgültig, wie stark sie sind.
+2. **Das Mittel richtet sich nach Zugang und Abgang.** Das Wertungsmittel steigt oder fällt, bis die Gehenden im Mittel so viel mitnehmen, wie die Kommenden mitbringen. Kommen alle bei
+   1500 und gehen Zufällige, strebt das Mittel dorthin, gleichgültig, wie stark sie sind; gehen die Schwächsten, liegt es darüber (nach 40 Saisons um rund 160 Punkte).
 3. **Die Fähigkeit steht nirgends.** Elo kennt nur Differenzen. Ob das Feld besser oder schlechter wurde, sieht man nur an einem **Anker**, einem Spieler konstanter
    Stärke, oder an einer externen Messlatte. In der Simulation ist die Fähigkeit bekannt, ihr Nullpunkt (1500) ist eine Konvention.
 4. **Drift** heißt hier: Änderung des Wertungsmittels minus Änderung der mittleren Fähigkeit des Feldes, in Punkten. Positiv ist Inflation, negativ Deflation.
@@ -150,7 +150,7 @@ with st.sidebar:
     if start == C.START[1]:
         seed_widget("prior_slider")
         prior = st.slider("Prior der Platzierung (Standardabweichung)", *bounds("prior_slider"), step=C.PRIOR_STEP, key="prior_slider", format="%.1f",
-                          help="Wie weit eine Schätzung vom Mittel 1500 abweichen darf (θ-Einheiten). Darüber (bei 2,0 und mehr) wächst die Drift unbegrenzt; siehe Experiment 6.")
+                          help="Wie weit eine Schätzung vom Mittel 1500 abweichen darf (θ-Einheiten). Der Regler endet bei 1,5, weil die Drift darüber schnell wächst (bei 2,0 und mehr läuft sie weg); siehe Experiment 6.")
         remember("prior_slider", prior)
     st.markdown("**Referenzspieler (Anker)**")
     use_anchor = st.checkbox("Anker mitspielen lassen", key="use_anchor_check", help="Ein Spieler mit konstanter Stärke (1500 per Konvention), der nie geht.")
@@ -235,7 +235,7 @@ rows2 = _field()
 st.plotly_chart(build_drift_lines(rows2), width="stretch", key="exp2_chart")
 verdict(*ev.verdict_field(rows2))
 
-st.subheader("🔬 Experiment 3: Anlauf-K erzeugt Punkte")
+st.subheader("🔬 Experiment 3: Anlauf-K ändert die Skala, wo die Startwertung falsch liegt")
 st.caption("Dieselbe Instanz mit festem K = 20 gegen Anlauf-K 120 (nach 10 Partien halbiert), je bei zufälligem Abgang und wenn die Schwächsten gehen.")
 rows3 = _start_k()
 st.plotly_chart(build_k_effects(rows3), width="stretch", key="exp3_chart")
@@ -314,7 +314,7 @@ Neuen + erzeugte Punkte je Wechsel.
 dem Beginn ($\bar s_0 = 0$ per Konvention).
 
 **Anker.** Ein Spieler mit $s = 0$ und Startwertung 1500. Im Gleichgewicht gilt etwa $R_{\text{Anker}} \approx \bar R - \bar s$, also die Drift; er läuft dem Ziel mit
-Geschwindigkeit $\sim k/4$ je Partie nach.
+der Geschwindigkeit $k\,p(1-p)$ je Partie nach, im Feld im Mittel etwa $k/5$ (höchstens $k/4$).
 
 **Platzierung.** Ein Neuer mit Stärke $s$ spielt $G = 10$ Partien gegen zufällige Mitglieder $o$ des Feldes mit Wertung $R_o$, Ausgänge $w_o$. Startwertung $\hat r$ maximiert
 $\sum_o \bigl[w_o \ln \sigma(r - R_o) + (1 - w_o) \ln(1 - \sigma(r - R_o))\bigr] - r^2/(2\tau^2)$ (Prior-Standardabweichung $\tau$); strikt konkav, Newton-Verfahren.
