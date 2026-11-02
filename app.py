@@ -90,9 +90,22 @@ Eine Elo-Wertung sagt nur, wie ein Spieler **gegenüber dem Feld** steht. Gehen 
 Ranking-Linie** hinter dem Elo-Stück und misst in einem simulierten Feld, wann das geschieht, woran man es erkennt (ein **Anker** konstanter Stärke) und was Anlauf-K,
 Untergrenze, K-Stufe und **Platzierungspartien** daran ändern.
 
-Weiter unten: sechs **🔬 Experimente** mit Verdikt, **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**.
+Direkt darunter: der Expander **💬 In einfachen Worten**. Weiter unten: sechs **🔬 Experimente** mit Verdikt, **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**.
 """
 )
+
+# erklaerseite:einfach:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/elo-inflation-erklaert.json, nicht von Hand ändern)
+with st.expander("💬 In einfachen Worten"):
+    st.markdown(
+        """
+Eine Wertung sagt nur, wie ein Spieler **gegenüber dem Feld** steht. Eine Partie schiebt Punkte von einem Spieler zum anderen, die Summe aller Wertungen bleibt gleich. Sie ändert sich nur durch Neue, die ihre Startzahl mitbringen, Gehende, die ihre Zahl mitnehmen, ungleiches K und eine Untergrenze. So kann die Skala **steigen** (Inflation) oder **fallen** (Deflation), ohne dass sich ein einzelner Spieler ändert.
+
+Die Demo simuliert ein Feld, in dem Spieler gehen und kommen, Neue lernen oder das ganze Feld besser oder schlechter wird. Die wahre Stärke ist bekannt, deshalb lässt sich die Drift messen. Ein **Anker**, ein Spieler konstanter Stärke, zeigt sie auch ohne diese Kenntnis, verspätet und mit Rauschen. Die sechs Experimente weiter unten zeigen je einen Fall mit einem Verdikt.
+
+[Ausführlich und verständlich erklärt, mit Fachteil](https://sebastianhanisch.net/elo-inflation-erklaert.html)
+        """
+    )
+# erklaerseite:einfach:end
 
 with st.expander("Warum die Skala wandert", expanded=True):
     st.markdown(
@@ -298,6 +311,28 @@ st.markdown(
 st.markdown("---")
 
 with st.expander("📐 Mathematische Formulierung"):
+    # erklaerseite:lesehilfe:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/elo-inflation-erklaert.json, nicht von Hand ändern)
+    st.markdown(
+        r"""
+**Lesehilfe.** Gegeben ist ein Feld von Spielern, die über Saisons Partien spielen und kommen oder gehen; ihre wahren Stärken $s$ kennt nur die Simulation. Gesucht ist, wie sich das Wertungsmittel $\bar R$ gegenüber dem Mittel der Stärken $\bar s$ entwickelt, die Drift $D_t$.
+
+| Symbol | Bedeutung |
+|---|---|
+| $R_i$ | Wertung von Spieler $i$ (logistische Einheiten, 0 entspricht 1500 Punkten) |
+| $s_i$ | wahre Stärke von Spieler $i$ (nur in der Simulation bekannt) |
+| $E_{ij}$ | Gewinnerwartung von $i$ gegen $j$ aus den Wertungen |
+| $P_{ij}$ | tatsächliche Gewinnchance von $i$ gegen $j$ aus den wahren Stärken |
+| $S$ | Ergebnis der Partie (1 Sieg, 0 Niederlage) |
+| $k_i$, $K$ | Verstärkung von Spieler $i$ in logistischen Einheiten bzw. in Elo-Punkten |
+| $K_0$, $g_i$, $F$ | Anlauf-K, Zahl der eigenen Partien und Untergrenze der Wertung |
+| $\Sigma$ | Summe der Wertungen aller aktiven Spieler |
+| $D_t$ | Drift nach Saison $t$: Wertungsmittel minus mittlere Stärke, beide gegenüber dem Beginn |
+| $\tau$, $w_o$, $r$ | Prior-Standardabweichung der Platzierung, Ausgang gegen Gegner $o$ und geschätzte Startwertung |
+
+[Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/elo-inflation-erklaert.html#fachleute)
+        """
+    )
+    # erklaerseite:lesehilfe:end
     st.markdown(
         r"""
 **Skala.** Wertungen $R$ in logistischen Einheiten; $1$ Einheit $= 400/\ln 10 \approx 173{,}7$ Elo-Punkte, $0 = 1500$. Die Erwartung ist $E_{ij} = \sigma(R_i - R_j)$,
