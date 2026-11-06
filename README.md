@@ -94,7 +94,7 @@ Alle Zahlen: 60 feste Läufe, 40 Spieler, 40 Saisons zu 20 Runden, K = 20, 15 % 
   Aussage; die Drift gegen die mittlere Fähigkeit ist dieselbe Aussage in der Sprache der Simulation.
 - **Zu- und Abgang sind stilisiert:** feste Quote, feste Verteilungen, keine Rückkehrer, keine Wertungsperioden, keine Mindestpartienzahl, zufällige Paarung im ganzen Feld.
 - **Das Rauschen des Ankers ist groß** (±40 Punkte je Lauf, ±5 bis ±9 im Mittel über 60 Läufe): Verschiebungen unter etwa 15 Punkten sind nicht zu deuten.
-- **Untergrenze und K-Stufe:** bei diesen Parametern wenig Wirkung, kein Beleg für Unschädlichkeit; die K-Stufe bewegt in 40 Saisons kaum jemanden über 1600.
+- **Untergrenze und K-Stufe:** bei diesen Parametern wenig Wirkung, kein Beleg für Unschädlichkeit; im Messfall „die Schwächsten gehen“ liegen nach 40 Saisons 77,5 % der Feldspieler bei oder über 1600 (mit K-Stufe 82 %); warum die Drift trotzdem nur um zwei Punkte abweicht (−25 gegen −27), ist ungeklärt.
 - **Platzierung ist eine Variante:** zehn Partien gegen zufällige Mitglieder, ein Prior bei 1500; mehr Partien (20 und 40) verschlechtern die Drift in der Vorab-Messung (30 Läufe,
   nicht in der App). Andere Verfahren sind nicht gemessen.
 - **Ein Feld von 10 bis 100, 60 Läufe je Zelle, ein Generator;** Unterschiede unter etwa ±5 Punkten sind Rauschen.
